@@ -5,22 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PW8P2_StudentGroup"
         mc:Ignorable="d"
-        Title="PW8P2-StudentGroup" Height="450" Width="800">
+        Title="PW8P2-StudentGroup" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen" FontSize="14">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Добавить"/>
-            <MenuItem Header="Изменить"/>
-            <MenuItem Header="Удалить"/>
+            <MenuItem x:Name="AddRecord" Header="Добавить" ToolTip="Производит добавление записи в зависимости от выбранного элемента одного из списков"/>
+            <MenuItem x:Name="EditRecord" Header="Изменить" ToolTip="Производит изменение записи в зависимости от выбранного элемента одного из списков"/>
+            <MenuItem x:Name="DeleteRecord" Header="Удалить" ToolTip="Производит удаление записи в зависимости от выбранного элемента одного из списков"/>
             <MenuItem x:Name="AutoFill" Header="Автозаполнение" ToolTip="Позволяет заполнить на 25 студентов список" Click="AutoFill_Click"/>
-            <MenuItem Header="Сортировка"/>
+            <MenuItem x:Name="Sort" Header="Сортировка" Click="Sort_Click"/>
             <MenuItem />
         </Menu>
         <GroupBox Header="Года и оценки студента" ToolTip="Показывает все года и оценки выбранного студента">
             <ListBox x:Name="YearsAndMarks" MinWidth="200"/>
         </GroupBox>
         <GroupBox Header="Студенты">
-        <ListView x:Name="StudentsMainInfo" SelectionChanged="StudentsMainInfo_SelectionChanged" SelectionMode="Single">
-            <ListView.ItemTemplate>
+            <ListView x:Name="StudentsMainInfo" SelectionChanged="StudentsMainInfo_SelectionChanged" SelectionMode="Single">
+                <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
@@ -35,7 +35,9 @@
                                 <TextBlock Text="{Binding Course}"/>
                                 <TextBlock Text=" | "/>
                                 <TextBlock Text="{Binding Group}"/>
-                        </StackPanel>
+                                <TextBlock Text=" | "/>
+                                <TextBlock Text="{Binding AvgMark}"/>
+                            </StackPanel>
                         <Separator/>
                     </StackPanel>
                 </DataTemplate>

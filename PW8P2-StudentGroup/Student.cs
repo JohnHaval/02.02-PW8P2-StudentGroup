@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 namespace PW8P2_StudentGroup
 {
     public class Student
-    {
+    {       
         public static int IDCounter { get; private set; } = 1;
         public int StudentID { get; private set; }
         public string SecondName { get; set; }
         public DateTime BornDate { get; set; }
         public int EnterYear { get; set; }
         public int Course { get; set; }
-        public string Group { get; set; }        
+        public string Group { get; set; } 
+        public double AvgMark { get => GetAvgMark(); }
         public List<Subject> Subjects;
 
         public Student()
@@ -97,14 +98,14 @@ namespace PW8P2_StudentGroup
         {
             Subjects.Add(subject);
         }        
-        public int GetAvgMark()
+        private double GetAvgMark()
         {
-            int allMarks = 0;
+            double allMarks = 0;
             for (int i = 0; i < Subjects.Count; i++)
             {
                 allMarks += Subjects[i].Mark;
             }
-            return allMarks / Subjects.Count;
+            return Math.Round(allMarks / Subjects.Count, 2);
         }
     }
 }
