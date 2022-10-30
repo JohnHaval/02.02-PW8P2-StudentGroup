@@ -23,7 +23,7 @@
             <MenuItem x:Name="AutoFill" Header="Автозаполнение" ToolTip="Позволяет заполнить на 25 студентов список" Click="AutoFill_Click"/>
             <MenuItem x:Name="Sort" Header="Сортировка" Click="Sort_Click"/>
             <MenuItem x:Name="ClearAll" Header="Очистить" Click="ClearAll_Click"/>
-            <MenuItem />
+            <MenuItem x:Name="Help" Header="Справка" Click="Help_Click"/>
         </Menu>
         <GroupBox Header="Года и оценки студента" ToolTip="Показывает все года и оценки выбранного студента">
             <ListBox x:Name="YearsAndMarks" MinWidth="200"/>
