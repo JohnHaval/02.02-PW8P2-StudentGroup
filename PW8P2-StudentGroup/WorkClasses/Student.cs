@@ -17,7 +17,6 @@ namespace PW8P2_StudentGroup
         public string Group { get; set; } 
         public double AvgMark { get => GetAvgMark(); }
         public List<Subject> Subjects;
-
         public Student()
         {
             StudentID = IDCounter++;
@@ -91,10 +90,10 @@ namespace PW8P2_StudentGroup
         {
             foreach (var value in subjects)
             {
-                YearComplete(value);
+                AddSubject(value);
             }
         }
-        public void YearComplete(Subject subject)
+        public void AddSubject(Subject subject)
         {
             Subjects.Add(subject);
         }        
@@ -106,6 +105,10 @@ namespace PW8P2_StudentGroup
                 allMarks += Subjects[i].Mark;
             }
             return Math.Round(allMarks / Subjects.Count, 2);
+        }
+        public static void ResetIDCounter()
+        {
+            IDCounter = 1;
         }
     }
 }

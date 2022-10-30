@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 namespace PW8P2_StudentGroup
 {
     /// <summary>
+    /// Hapro Bishop (Sergey Lopatkin) 
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
@@ -63,7 +64,6 @@ namespace PW8P2_StudentGroup
                 new Student("Колисеев", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
                 new Student("Локоткин", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
                 new Student("Прямостронов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                //15, need 25
                 new Student("Сверлов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
                 new Student("Скосов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
                 new Student("Ильев", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
@@ -105,6 +105,122 @@ namespace PW8P2_StudentGroup
                 Owner = this
             };
             if (win.ShowDialog() == true) StudentsMainInfo.Items.Refresh();
+        }
+
+        private void ClearAll_Click(object sender, RoutedEventArgs e)
+        {
+            Students.Clear();
+            Student.ResetIDCounter();
+            StudentsMainInfo.ItemsSource = null;
+            YearsAndMarks.Items.Clear();
+        }
+
+        private void AddStudent_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new StudentWindow()
+            {
+                Owner = this
+            };
+            if (win.ShowDialog() == true)
+            {
+                if (StudentsMainInfo != null) StudentsMainInfo.Items.Refresh();
+                else StudentsMainInfo.ItemsSource = Students;
+            }
+        }
+
+        private void AddSubject_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (StudentsMainInfo != null)
+                {
+                    var win = new SubjectWindow(((Student)StudentsMainInfo.SelectedItem).StudentID)
+                    {
+                        Owner = this
+                    };
+                    if (win.ShowDialog() == true) StudentsMainInfo_SelectionChanged(sender, null);
+                }
+                else throw new Exception();
+            }
+            catch
+            {
+                MessageBox.Show("Перед добавлением предмета, необходимо выбрать студента!", "Добавление предмета", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void EditStudent_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (StudentsMainInfo != null)
+                {
+                    var win = new StudentWindow((Student)StudentsMainInfo.SelectedItem)
+                    {
+                        Owner = this
+                    };
+                    if (win.ShowDialog() == true) StudentsMainInfo.Items.Refresh();
+                }
+                else throw new Exception();
+            }
+            catch
+            {
+                MessageBox.Show("Перед изменением студента, необходимо его выбрать!", "Изменение студента", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void EditSubject_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (YearsAndMarks != null)
+                {
+                    var win = new SubjectWindow((Subject)YearsAndMarks.SelectedItem)
+                    {
+                        Owner = this
+                    };
+                    if (win.ShowDialog() == true) StudentsMainInfo_SelectionChanged(sender, null);
+                }
+                else throw new Exception();
+            }
+            catch
+            {
+                MessageBox.Show("Перед изменением предмета для студента, необходимо его выбрать!", "Изменение предмета", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DeleteStudent_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (StudentsMainInfo != null)
+                {
+                    Students.Remove((Student)StudentsMainInfo.SelectedItem);
+                    StudentsMainInfo.Items.Refresh();
+                }
+                else throw new Exception();
+            }
+            catch
+            {
+                MessageBox.Show("Перед удалением студента, необходимо его выбрать!", "Удаление студента", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DeleteSubject_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (YearsAndMarks != null)
+                {
+                    Students.Find(student => 
+                    student.StudentID == ((Student)StudentsMainInfo.SelectedItem).StudentID).Subjects.Remove((Subject)YearsAndMarks.SelectedItem);
+                    StudentsMainInfo.Items.Refresh();
+                }
+                else throw new Exception();
+            }
+            catch
+            {
+                MessageBox.Show("Перед удалением студента, необходимо его выбрать!", "Удаление студента", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
