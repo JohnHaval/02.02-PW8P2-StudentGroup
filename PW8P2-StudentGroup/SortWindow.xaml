@@ -1,0 +1,23 @@
+﻿<Window x:Class="PW8P2_StudentGroup.SortWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PW8P2_StudentGroup"
+        mc:Ignorable="d"
+        Title="Сортировка" FontSize="14" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <StackPanel>
+        <Label Content="Выбор свойства студента"/>
+        <ComboBox x:Name="SortSelector" Margin="3">
+            <ComboBoxItem Content="По ИД"/>
+            <ComboBoxItem Content="По фамилии"/>
+            <ComboBoxItem Content="По дате рождения"/>
+            <ComboBoxItem Content="По году поступления"/>
+            <ComboBoxItem Content="По курсу"/>
+            <ComboBoxItem Content="По группе"/>
+            <ComboBoxItem Content="По средней оценке"/>
+        </ComboBox>
+        <CheckBox x:Name="DownSorting" Content="По убыванию" Margin="3"/>
+        <Button x:Name="Sort" Content="Сортировать" Margin="3"/>
+    </StackPanel>
+</Window>
