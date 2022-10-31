@@ -30,74 +30,26 @@ namespace PW8P2_StudentGroup
         {
             try
             {
-                var student = (Student)e.AddedItems[0];
-                YearsAndMarks.Items.Clear();
-                foreach (var value in student.Subjects)
+                YearsAndMarks.ItemsSource = null;
+                if (e == null)
                 {
-                    YearsAndMarks.Items.Add($"{value.Year} | {value.Name} | {value.Mark}");
+                    if (YearsAndMarks == null)
+                    {
+                        CurrentSturdentID = -1;
+                    }
+                    return;
                 }
+                var student = (Student)e.AddedItems[0];
+                CurrentSturdentID = student.StudentID;
+                YearsAndMarks.ItemsSource = student.Subjects;
             }
             catch { }
         }
-        static Random rnd;
+        public int CurrentSturdentID = -1;
         private void AutoFill_Click(object sender, RoutedEventArgs e)
         {            
-            StudentsMainInfo.ItemsSource = AutoFillList();
-        }
-        public static List<Student> AutoFillList()
-        {
-            rnd = new Random();
-            Students = new List<Student>()
-            {
-                new Student("Кронов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Плутонов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Ножнов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Криклиев", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Потеркин", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Струганов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Смирнов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Косов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Иноров", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Невоськин", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Петров", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Иванов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Колисеев", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Локоткин", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Прямостронов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Сверлов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Скосов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Ильев", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Касаткин", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Авоськин", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Попугаев", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Неонов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Локомотов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Прямолинейнов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks()),
-                new Student("Состряпов", Convert.ToDateTime($"{rnd.Next(1,31)}.{rnd.Next(1,13)}.{rnd.Next(1970,1990)}"), 2000, 4, "П-41", AutoFillYearsAndMarks())
-            };
-            return Students;
-        }
-        public static List<Subject> AutoFillYearsAndMarks()
-        {            
-            var subjects = new List<Subject>();
-            for (int i = 0; i < 3; i++)
-            {
-                var subject1 = new Subject(Student.IDCounter, "СП", 2000 + i, rnd.Next(2, 6));
-                var subject2 = new Subject(Student.IDCounter, "РПМ", 2000 + i, rnd.Next(2, 6));
-                var subject3 = new Subject(Student.IDCounter, "КС", 2000 + i, rnd.Next(2, 6));
-                var subject4 = new Subject(Student.IDCounter, "ВиПКС", 2000 + i, rnd.Next(2, 6));
-                var subject5 = new Subject(Student.IDCounter, "ТПМ", 2000 + i, rnd.Next(2, 6));
-                var subject6 = new Subject(Student.IDCounter, "ДПП", 2000 + i, rnd.Next(2, 6));
-                subjects.Add(subject1);
-                subjects.Add(subject2);
-                subjects.Add(subject3);
-                subjects.Add(subject4);
-                subjects.Add(subject5);
-                subjects.Add(subject6);
-            }
-            return subjects;
-        }
-
+            StudentsMainInfo.ItemsSource = AutoFillWithoutGUI.AutoFillList();
+        }        
         private void Sort_Click(object sender, RoutedEventArgs e)
         {
             var win = new SortWindow()
@@ -114,7 +66,11 @@ namespace PW8P2_StudentGroup
             StudentsMainInfo.ItemsSource = null;
             YearsAndMarks.Items.Clear();
         }
-
+        public void RefreshAll()
+        {
+            StudentsMainInfo.Items.Refresh();
+            YearsAndMarks.Items.Refresh();
+        }
         private void AddStudent_Click(object sender, RoutedEventArgs e)
         {
             var win = new StudentWindow()
@@ -123,7 +79,7 @@ namespace PW8P2_StudentGroup
             };
             if (win.ShowDialog() == true)
             {
-                if (StudentsMainInfo != null) StudentsMainInfo.Items.Refresh();
+                if (StudentsMainInfo.ItemsSource != null) RefreshAll();
                 else StudentsMainInfo.ItemsSource = Students;
             }
         }
@@ -134,11 +90,12 @@ namespace PW8P2_StudentGroup
             {
                 if (StudentsMainInfo != null)
                 {
-                    var win = new SubjectWindow(((Student)StudentsMainInfo.SelectedItem).StudentID)
+                    if (CurrentSturdentID == -1 || StudentsMainInfo.Items.Count == 0) throw new Exception();
+                    var win = new SubjectWindow(CurrentSturdentID)
                     {
                         Owner = this
                     };
-                    if (win.ShowDialog() == true) StudentsMainInfo_SelectionChanged(sender, null);
+                    if (win.ShowDialog() == true) RefreshAll();
                 }
                 else throw new Exception();
             }
@@ -154,11 +111,12 @@ namespace PW8P2_StudentGroup
             {
                 if (StudentsMainInfo != null)
                 {
+                    if (StudentsMainInfo.SelectedItem == null) throw new Exception();
                     var win = new StudentWindow((Student)StudentsMainInfo.SelectedItem)
                     {
                         Owner = this
                     };
-                    if (win.ShowDialog() == true) StudentsMainInfo.Items.Refresh();
+                    if (win.ShowDialog() == true) RefreshAll();
                 }
                 else throw new Exception();
             }
@@ -174,17 +132,18 @@ namespace PW8P2_StudentGroup
             {
                 if (YearsAndMarks != null)
                 {
+                    if (YearsAndMarks.SelectedItem == null) throw new Exception();
                     var win = new SubjectWindow((Subject)YearsAndMarks.SelectedItem)
                     {
                         Owner = this
                     };
-                    if (win.ShowDialog() == true) StudentsMainInfo_SelectionChanged(sender, null);
+                    if (win.ShowDialog() == true) RefreshAll();
                 }
                 else throw new Exception();
             }
             catch
             {
-                MessageBox.Show("Перед изменением предмета для студента, необходимо его выбрать!", "Изменение предмета", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Перед изменением предмета для студента, необходимо его выбрать после выбора студента!", "Изменение предмета", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -194,8 +153,9 @@ namespace PW8P2_StudentGroup
             {
                 if (StudentsMainInfo != null)
                 {
+                    if (StudentsMainInfo.SelectedItem == null) throw new Exception();
                     Students.Remove((Student)StudentsMainInfo.SelectedItem);
-                    StudentsMainInfo.Items.Refresh();
+                    RefreshAll();
                 }
                 else throw new Exception();
             }
@@ -211,15 +171,17 @@ namespace PW8P2_StudentGroup
             {
                 if (YearsAndMarks != null)
                 {
+                    if (CurrentSturdentID == -1) throw new Exception();
+                    if (YearsAndMarks.SelectedItem == null) throw new Exception();
                     Students.Find(student => 
-                    student.StudentID == ((Student)StudentsMainInfo.SelectedItem).StudentID).Subjects.Remove((Subject)YearsAndMarks.SelectedItem);
-                    StudentsMainInfo.Items.Refresh();
+                    student.StudentID == CurrentSturdentID).Subjects.Remove((Subject)YearsAndMarks.SelectedItem);
+                    RefreshAll();
                 }
                 else throw new Exception();
             }
             catch
             {
-                MessageBox.Show("Перед удалением студента, необходимо его выбрать!", "Удаление студента", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Перед удалением предмета, необходимо его выбрать после выбора студента!", "Удаление студента", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -232,7 +194,7 @@ namespace PW8P2_StudentGroup
                 "каждого года обучения. " +
                 "\nНазначение задачи: получить значение определѐнного критерия и упорядочить " +
                 "список студентов по нему. " +
-                "\nДостигаемая цель: упорядочить список студентов по среднему баллу и получить его", "Справка", MessageBoxButton.OK, MessageBoxImage.Error);
+                "\nДостигаемая цель: упорядочить список студентов по среднему баллу и получить его", "Справка", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

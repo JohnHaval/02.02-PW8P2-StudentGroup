@@ -8,7 +8,7 @@
         Title="Добавить предмет" MinWidth="180" FontSize="14" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <StackPanel>
         <Label Content="Имя предмета"/>
-        <TextBox x:Name="Name" Margin="3" MaxLength="50"/>
+        <TextBox x:Name="SubjectName" Margin="3" MaxLength="50"/>
         <Label Content="Год"/>
         <TextBox x:Name="Year" Margin="3" MaxLength="4"/>
         <Label Content="Оценка"/>

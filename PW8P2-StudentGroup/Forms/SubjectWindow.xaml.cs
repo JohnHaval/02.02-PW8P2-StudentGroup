@@ -22,7 +22,7 @@ namespace PW8P2_StudentGroup
         public SubjectWindow(int studentID)
         {
             InitializeComponent();
-            StudentID = studentID;
+            CurrentStudentID = studentID;
         }
         public SubjectWindow(Subject subject)
         {
@@ -34,11 +34,11 @@ namespace PW8P2_StudentGroup
         }
         private void TransferDataToGUI()
         {
-            Name.Text = Subject.Name;
+            SubjectName.Text = Subject.Name;
             Year.Text = Subject.Year.ToString();
             Mark.Text = Subject.Mark.ToString();
         }
-        int StudentID = -1;
+        int CurrentStudentID = -1;
         Subject Subject;
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
@@ -47,16 +47,17 @@ namespace PW8P2_StudentGroup
             {
                 var subject = new Subject()
                 {
-                    Name = Name.Text,
+                    StudentID = CurrentStudentID,
+                    Name = SubjectName.Text,
                     Year = Convert.ToInt32(Year.Text),
                     Mark = Convert.ToInt32(Mark.Text)
                 };
-                if (StudentID != -1) MainWindow.Students.Find(student => student.StudentID == StudentID).AddSubject(subject);
+                if (CurrentStudentID != -1) MainWindow.Students.Find(student => student.StudentID == CurrentStudentID).AddSubject(subject);
                 else
                 {
-                    Subject.Name = subject.Name;
-                    Subject.Year = subject.Year;
-                    Subject.Mark = subject.Mark;
+                    MainWindow.Students.Find(student => student.StudentID == Subject.StudentID).Subjects.Remove(Subject);
+                    subject.StudentID = Subject.StudentID;
+                    MainWindow.Students.Find(student => student.StudentID == Subject.StudentID).AddSubject(subject);
                 }
                 DialogResult = true;
                 Close();

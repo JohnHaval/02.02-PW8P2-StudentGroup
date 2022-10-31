@@ -26,7 +26,19 @@
             <MenuItem x:Name="Help" Header="Справка" Click="Help_Click"/>
         </Menu>
         <GroupBox Header="Года и оценки студента" ToolTip="Показывает все года и оценки выбранного студента">
-            <ListBox x:Name="YearsAndMarks" MinWidth="200"/>
+            <ListBox x:Name="YearsAndMarks" MinWidth="200">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Year}"/>
+                            <TextBlock Text=" | "/>
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text=" | "/>
+                            <TextBlock Text="{Binding Mark}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </GroupBox>
         <GroupBox Header="Студенты">
             <ListView x:Name="StudentsMainInfo" SelectionChanged="StudentsMainInfo_SelectionChanged" SelectionMode="Single">
